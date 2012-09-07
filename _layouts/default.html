@@ -1,0 +1,32 @@
+{% include head.html %}
+    <div class="wrapper">
+      <header>
+        <h1>{{ page.title }}</h1>
+        <p>{{ page.headline }}</p>
+        <p class="view"><a href="https://github.com/{{ page.author }}">View the Project on GitHub <small>{{ page.author }}</small></a></p>
+        <ul>
+          <li class="single"><a href="">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        {{ content }}
+      </section>
+      <header>
+        <h2>Last posts</h2>
+      </header>
+      <section>
+        {% for post in site.posts limit:10 %}
+        <div class="wrapper">
+          <header>
+            <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+            {{ post.date | date_to_string }}
+          </header>
+          <section>
+            <p>{{ post.content | strip_html | truncatewords: 55 }}</p>
+          </section>
+          <p class="read-more"><a href="{ post.url }}">Read more ...</a></p>
+        </div>
+        {% endfor %}
+      </section>
+    </div>
+{% include foot.html %}
