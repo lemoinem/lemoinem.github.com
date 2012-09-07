@@ -1,7 +1,7 @@
 # lemoinem's blog
 
-Here is the source for my blog <lemoinem.github.com>. The source code of the
-`_layouts` is inspired from the [Jekyll modernist
+Here is the source for my blog <http://blog.mlemoine.name>. The source code of
+the `_layouts` is inspired from the [Jekyll modernist
 theme](https://github.com/orderedlist/modernist) and the [gitwatcher blog source
 code](https://github.com/lgs/gitwatcher-blog).
 
