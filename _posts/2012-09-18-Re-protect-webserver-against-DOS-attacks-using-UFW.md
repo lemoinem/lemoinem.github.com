@@ -6,7 +6,8 @@ title: "Re: Protect Webserver against DOS attacks using UFW"
 This is my answer to a friend post [Protect Webserver against DOS attacks using
 UFW](http://blog.lavoie.sl/2012/09/protect-webserver-against-dos-attacks.html). I
 intended to post it as a comment, however, it looks like I was a bit carried up
-and my answer was "a tad too long" for his comment system.
+and my answer was "a tad too long" for his comment system. *&#91;edit&#93;You
+will find his own answer to my post there too.&#91;/edit&#93;*
 
 Quite interesting article. Although the goal is important and utterly relevant,
 considering the number of automatic bots now creeping around in our virtual
