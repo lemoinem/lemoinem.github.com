@@ -3,9 +3,9 @@
       <header>
         <h1>{{ page.title }}</h1>
         <p>{{ page.headline }}</p>
-        <p class="view"><a href="https://github.com/{{ page.author }}">View the Project on GitHub <small>{{ page.author }}</small></a></p>
+        <p class="view"><a href="https://github.com/{{ site.author }}">View the Project on GitHub <small>{{ page.author }}</small></a></p>
         <ul>
-          <li class="single"><a href="">View On <strong>GitHub</strong></a></li>
+          <li class="single"><a href="https://github.com/{{ site.author }}">View On <strong>GitHub</strong></a></li>
         </ul>
       </header>
       <section>
@@ -24,7 +24,7 @@
           <section>
             <p>{{ post.content | strip_html | truncatewords: 55 }}</p>
           </section>
-          <p class="read-more"><a href="{ post.url }}">Read more ...</a></p>
+          <p class="read-more"><a href="{ post.url }}">Read more...</a></p>
         </div>
         {% endfor %}
       </section>
