@@ -23,7 +23,7 @@ This article was actually the key for me. Notice how it's using `authAuthority:
 ;basic;` to use the OpenLDAP standard userPassword attribute. I thought: that
 means this attribute is the key to retrieve my lost passwords.
 
-On a standard Open Directory, you usually have to values for this attribute: one
+On a standard Open Directory, you usually have two values for this attribute: one
 starting by `;ApplePasswordServer;` and one starting by `;Kerberosv5;`. That
 means two different way of retrieving your passwords. However none of these
 solutions gives you an hash compatible with OpenLDAP (plain-text, crypt, or
