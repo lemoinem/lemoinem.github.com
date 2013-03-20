@@ -24,7 +24,7 @@
           <section>
             <p>{{ post.content | strip_html | truncatewords: 55 }}</p>
           </section>
-          <p class="read-more"><a href="{ post.url }}">Read more...</a></p>
+          <p class="read-more"><a href="{{ post.url }}">Read more...</a></p>
         </div>
         {% endfor %}
       </section>
