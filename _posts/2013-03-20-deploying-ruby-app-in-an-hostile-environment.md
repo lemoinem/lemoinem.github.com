@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Deploying a Ruby app in an hostile environment "
+title: "Deploying a Ruby app in an hostile environment"
 ---
 
 \[Disclaimer: Here is a blog-post I wrote for my company blog. You can find the
 original text at
-http://www.mentel.com/deploying-a-ruby-app-in-an-hostile-environment/. They
+<http://www.mentel.com/deploying-a-ruby-app-in-an-hostile-environment/>. They
 kindly allow me to publish a copy on here!\]
 
 While the developer's job is to design and create the web applications the
