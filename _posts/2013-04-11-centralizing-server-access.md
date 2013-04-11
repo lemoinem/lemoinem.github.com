@@ -39,11 +39,11 @@ To solve this problem, we therefore need a local middle-man with an OpenSSH
 support. [nscd](http://linux.die.net/man/8/nscd) could be a solution, but there
 is no OpenSSH support and the cache has to be manually cleared on a regular
 basis to avoid out-of-date record (as simple as a crobjob, but still a
-hassle). [SSSd](https://fedorahosted.org/sssd/) is the one. The cache is easy
+hassle). [SSSD](https://fedorahosted.org/sssd/) is the one. The cache is easy
 enough to configure, works like a charm and can be configured so it's trusted
 only when the LDAP server is out-of-reach.
 
-The sssd project being run by the Fedora/Red Hat team, the configuration process
+The SSSD project being run by the Fedora/Red Hat team, the configuration process
 follow a very Unix way of doing things: One step at a time. The first step is
 configuring the ldap-tools and making sure your new server can reach the LDAP
 and fetch all the information it needs just fine. That shouldn't be more than 4
@@ -51,16 +51,25 @@ config lines in
 [`ldap.conf`](https://gist.github.com/lemoinem/5208310#file-ldap-conf). Then
 configure `sssd` to use it as a backend. The config is a bit lengthier ([25
 lines](https://gist.github.com/lemoinem/5208310#file-sssd-conf)) but it includes
-everything you'll ever need from sssd. Important configs here are `enumerate =
-true`, `services` and the LDAP domain config. You probably should leave
-`cache_credential` to `false` to start with.
+everything you'll ever need from SSSD. Important configs here are `enumerate =
+true`, `services` and the LDAP domain config. `enumerate = true` is actually
+advised against unless you have a real reason to use it. In my case the servers
+are often left unattended for a very long period of time or at least deployers
+are going to connect to server using application specific login (each of my
+websites has its own user that's used for deploying). This means sysadmins
+account will probably not be pre-populated. Make sure this is the case for you
+too since using enumeration could induce delays and high load on the LDAP
+server. I still recommand to use `enumerate = true` to start with so you can
+make sure the nss bridge works fine, but remember to disable it afterward if you
+have no use for it. You probably should leave `cache_credential` to `false` to
+start with too.
 
-As far as I know, there is no direct way to query the sssd daemon. The simplest
-way to test the config is to add sssd as a nss responder. Modify
+As far as I know, there is no direct way to query the SSSD daemon. The simplest
+way to test the config is to add SSSD as a nss responder. Modify
 [`nsswitch.conf`](https://gist.github.com/lemoinem/5208310#file-nsswitch-conf-extract)
-to use sssd for `passwd`, `group` and `shadow` (eventually netgroup too). You
+to use SSSD for `passwd`, `group` and `shadow` (eventually netgroup too). You
 should then be able to see your users and groups via getent passwd and getent
-group. However, unless you're using a different config for sssd allowing it to
+group. However, unless you're using a different config for SSSD allowing it to
 see your password, the users shouldn't show up in `getent shadow`.
 
 Second part: make authentication work. For most reasonably recent Linux/Unix
@@ -87,19 +96,19 @@ even a non-existent IP (Using `/etc/hosts`).
 
 So, now we have everything we need authentication-wise. What about SSH? Well,
 you may have notice three lines mentioning ssh in my `sssd.conf`. Just adding
-these will allow sssd to provide ssh key support. You need a fairly recent
-version of sssd however, 1.9+. To store the public keys in your users, you need
+these will allow SSSD to provide ssh key support. You need a fairly recent
+version of SSSD however, 1.9+. To store the public keys in your users, you need
 to use this LDAP schema:
 <https://gist.github.com/lemoinem/5208310#file-openssh_user_public_key-schema-ldiff>. The
 keys themselves can be stored just the way you would do it in an `authorized_keys`
 file, no restrictions.
 
-Now, you can be sure that having such a clean API as sssd, it won't be walking
+Now, you can be sure that having such a clean API as SSSD, it won't be walking
 around, creating or updating `authorized_keys` files around... There is a
 command-line tool, something part of sssd-tools, called
 `sss_ssh_authorized`. And it's doing exactly what you probably think. Give it a
-username, it will retrieve the ssh keys associated to it. The ones sssd knows
-about anyway. You can call it directly to test if sssd is recognizing your ssh
+username, it will retrieve the ssh keys associated to it. The ones SSSD knows
+about anyway. You can call it directly to test if SSSD is recognizing your ssh
 keys the right way. But the problem is now how to feed that to OpenSSH... Looks
 like we are back to the good old cronjob solution? NOT! Of course...
 
@@ -116,7 +125,7 @@ I've made a couple of tests and had everything running smoothly for about two
 weeks now, and while I haven't thoroughly tested it, I encourage everybody to
 test it and use it! It seems stable enough to be set up into production (with a
 fallback local sudoer user). Of course, most of current PROD approved
-distributions won't be included these fairly recent patches or versions of sssd
+distributions won't be included these fairly recent patches or versions of SSSD
 and OpenSSH. If you're using Ubuntu however, you're in for a treat, since there
 is a PPA for that so it can installed on the last LTS (12.04, Precise):
 <https://launchpad.net/~nicholas-hatch/+archive/auth>.
