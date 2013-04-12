@@ -133,3 +133,9 @@ is a PPA for that so it can installed on the last LTS (12.04, Precise):
 PS: Of course, you don't always want everybody to be able to login into your
 servers, but that's what [pam_access](http://linux.die.net/man/5/access.conf) is
 for.
+
+PPS: If you want to help improve SSSD and its tool suite, you may want to take a
+look to [F19 test
+days](http://fedoraproject.org/wiki/QA/Fedora_19_test_days). There are three
+related test days currently planed: 2013-05-09 for SSSD Improve and AD
+Integration, 2013-04-18 and 2013-06-06 for FreeIPA (AD and MFA).
