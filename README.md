@@ -16,6 +16,6 @@ Unported License](http://creativecommons.org/licenses/by-sa/3.0/).
 My own code is distributed under a [BSD-3
 License](http://opensource.org/licenses/bsd-3-clause).
 
-The content of the `_posts/` directory and `index.*` is licensed under a [BSD-3
-License](http://opensource.org/licenses/bsd-3-clause) unless mentioned
+The content of the `_posts/` directory and `index.*` is licensed under a [Creative Commons Attribution
+4.0 License](https://creativecommons.org/licenses/by/4.0/) unless mentioned
 otherwise.
