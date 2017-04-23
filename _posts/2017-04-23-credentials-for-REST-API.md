@@ -48,7 +48,7 @@ MUST include:
 The data included in the encrypted part MUST include:
 * `aud`/Audience (Origin scope of the token, used for CSRF protection, MAY be
   skipped or set to null in some cases, 4)
-* `sub`/Subject (userID)
+* `sub`/Subject (userID, unless in the case of an anonymous token)
 * In case of an app/API supporting external authentication: `iss`/Issuer
 * `jti`/JWT ID: a uniq ID, used as a nonce to prevent easy identification and
   tracking of the `sub` claim (8). Without a nonce, the encrypted part would be
