@@ -53,5 +53,5 @@ what should be important and why in the following posts:
 
 1. [Credentials (tokens)](/2017/04/23/credentials-for-REST-API.html)
 2. [Credentials storage and transit](2017/04/23/Credentials-storage-and-transit-in-REST-API-and-web-apps.html)
-  a. [Out-of-band credentials storage and transit](2017/04/23/Out-of-band-credentials-storage-and-transit-in-REST-API-and-web-apps.html)
-  b. [In band credentials storage and transit](2017/04/23/In-band-credentials-storage-and-transit-in-REST-API-and-web-apps.html)
+    1. [Out-of-band credentials storage and transit](2017/04/23/Out-of-band-credentials-storage-and-transit-in-REST-API-and-web-apps.html)
+    2. [In band credentials storage and transit](2017/04/23/In-band-credentials-storage-and-transit-in-REST-API-and-web-apps.html)
