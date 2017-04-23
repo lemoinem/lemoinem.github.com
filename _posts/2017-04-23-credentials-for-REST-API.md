@@ -3,6 +3,11 @@ layout: post
 title: "Credentials format for REST APIs in the context of Web Apps (Part 1)"
 ---
 
+This is the first part of my [Authentatication and security for REST API in the
+context of Web Apps](/2017/04/22/REST-APIs-authentication-and-security.html)
+serie of posts. In this one, we will focus on how to design credentials
+containers (token and such).
+
 When one says authentication, one automatically thinks about credentials.
 
 Up to now, the basic way to store credentials in a Web App, was through the use of sessions:

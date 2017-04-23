@@ -36,4 +36,7 @@ My main concerns are (in no particular order, but numbered for easy reference):
 8. If a token is ever leaked, a third party shouldn’t be able to link it easily to a used (remove user-tracking capabilities)
 9. Should limit account brute-forcing
 
-I will try to address and discuss these concerns and offer better insight on what should be important and why.
+I will try to address and discuss these concerns and offer better insight on
+what should be important and why in the following posts:
+
+1. [Credentials (tokens)](/2017/04/23/credentials-for-REST-API.html)
