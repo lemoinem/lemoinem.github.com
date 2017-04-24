@@ -37,7 +37,7 @@ To provide easier automation, this [hydra:Class](http://www.w3.org/ns/hydra/core
 property with value [rest-auth:authentication](http://ld.lemoinem.name/ns/rest-auth#authentication).
 
 The supported operations MUST include:
-* a POST operation on the resource itself, used to create a new explicitly authenticated token,
+* one or several POST operations on the resource itself, used to create a new explicitly authenticated token,
 * a GET operation, on the resource itself, used to refresh a token.
 
 Since tokens are intended to be opaque and stateless with respect to the server,
@@ -91,7 +91,7 @@ it SHOULD revalidate the [hydra:ApiDocumentation](http://www.w3.org/ns/hydra/cor
 provided in the [hydra:entrypoint](http://www.w3.org/ns/hydra/core#entrypoint). This is to ensure API discoverability
 in the case where the Web App has been hiding its authenticated API.
 
-The POST operation on the token resources MUST supports inputs to achieve the following features.
+The POST operations on the token resources MUST supports inputs to achieve the following features.
 Each input SHOULD be tagged (in the API documentations) with the appropriate value for the
 [wrds:describedBy](http://www.iana.org/assignments/relation/describedby) property. These inputs MAY be
 specified as query-string parameters.
