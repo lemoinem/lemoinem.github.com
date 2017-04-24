@@ -47,6 +47,7 @@ My main concerns are (in no particular order, but numbered for easy reference):
 8. If a token is ever leaked, a third party shouldn’t be able to link it easily
    to a used (remove user-tracking capabilities)
 9. Should limit account brute-forcing
+10. Should limit or mitigate phishing attacks if possible.
 
 I will try to address and discuss these concerns and offer better insight on
 what should be important and why in the following posts:
