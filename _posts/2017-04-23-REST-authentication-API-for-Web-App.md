@@ -113,12 +113,25 @@ simply means droping the token and starting anew.
 
 ### Unauthenticated state modifying operations
 
-In order to prevent CSRF vulnerabilities, the REST API MUST reject with a "401 Unauthorized" response
-any unauthenticated (i.e. request not including any token) state modifying request.
+In order to prevent CSRF vulnerabilities, the REST API SHOULD reject with a "401 Unauthorized" response
+any unauthenticated (i.e. not including any token) state modifying request.
 The WWW-Authenticate header MUST include a Bearer challenge whose realm parameter MAY be set to the
-IRI of the token endpoint.
+IRI of the token endpoint. Most services nowadays do not offer state modifying request
+to anonymous users (an exception could be a completely open and free platform such as Wikipedia).
 
-The WWW-Authenticate header is not the prefered method of discoverability because it is very lously defined.
+In particular, the REST API MUST reject in this manner any unauthenticated (i.e. not including any token)
+request to generate an automatically managed out-of-band (e.g., in a cookie) authentication token.
+
+It is very important to consider that some authentication schemes (e.g., the ones relying on
+a trusted third party) could come with their own vulnerabilities to login CSRF even
+for manually managed authentication tokens.
+
+The risk of login CSRF is greatly reduced for Web App using either an in-band or
+manually managed out-of-band authentication token. However, the API must protect Web App using
+cookies (or another automatically managed out-of-band method) by ensuring they won't issue
+an unrequested authentication token.
+
+The WWW-Authenticate header is not the prefered method of discoverability because it is very lously defined. 
 User agents SHOULD rely on HATEOAS discoverability (e.g. using hydra) rather than the WWW-Authenticate header
 until it is better integrated to the HATEOAS principle.
 
@@ -148,10 +161,11 @@ The protections against CRSF detailed here are based on the following assumption
 * A user agent will consistently publicize the origin of its requests to the server.
 
 "consistently publicize the origin" does not mean a user agent must send a Referer or Origin Header to the server, it has
-complete and total liberty to choose to do so or not. However, it MUST apply this choice consistently during the whole
+complete and total freedom to choose to do so or not. However, it MUST apply this choice consistently during the whole
 session's lifetime.
 
-In particular, the service MUST include the user-agent's `Origin` as the value for the `aud` claim of any fresh token.
+In particular, the service MUST include the user-agent's `Origin` as the value for the `aud` claim of any fresh
+token unless the user-agent's `Origin` is NULL.
 
 CSRF checks only apply if the user-agent provides a token. Unauthenticated request cannot be protected against CSRF attacks.
 
