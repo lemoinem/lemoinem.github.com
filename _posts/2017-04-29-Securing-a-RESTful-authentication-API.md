@@ -11,20 +11,47 @@ and a RESTful authentication API to manage these tokens.
 Although our authentication API includes protections against CSRF login attacks, there are other attacks that
 could be triggered easily. Let's try to expose such attacks and find a way to mitigate them.
 
+### Phishing attacks
+
+Using the secret image and personal phrase technique prevent an attacker to easily impersonate the API and grab a user's
+credentials (phishing attacks). However, it doesn't make such an attack impossible, but only requires the attacker
+to communicate with the actual API in order to present the user with correct information.
+
+For these reasons, access to the API should be appropriately restricted:
+* An API which is not intended to be accessible by non-browser clients SHOULD require a user-agent to behave similarly to
+  a standard browser and to provide an Origin or a Referer header.
+* An API which is intended to be accessed only through a small set of in-browser clients SHOULD use Origin-restrictions such   as CORS policies to whitelist authorized Origins.
+
+Our requirement for consistent user-agent origins already segregate browser-like user-agents from programatic or
+native software-like user-agents. Special care should be taken as to which browsers and environments are supported.
+Some networks or user-agents might be configured to block Origin and Refered Headers, this must be taken into account
+while applying restrictions on the API.
+
+Even then, these restrictions will never prevent completely phishing attacks. However, they will require the attacker
+to provide its own system proxying requests to the real API and impersonating a browser-like user agent acting from the
+correct Origin. Additional phishing-mitigating measures must be put in place, such as Extended Validation TLS certificate
+or another kind of publiic verification of identity provided by a trusted third-party.
+
+These attacks can never be fully prevented at the application level. Like every social engineering based attacks, the
+most efficient prevention measures are user education and identity information public dissemination.
+
 ### Account probing
 
 An account probing is an attack trying to leverage answers from the authentication process to determine whether an account
-exists or not. They are the reason why most websites won't tell the user whether the account doesn't exist or the given
+exists or not. These attacks allow an attacker to reduce the attack surface and focus attack vectors.
+They are the reason why most websites nowadays won't tell the user whether an account doesn't exist or a given
 password for an existing account is invalid. The user is usually presented with a generic "Invalid login or password".
+This forces an attacker to confirm the existence of an account using other indirect and more costly means.
 
-Since our API is designed to authenticate the server by providing the user with a secret image and personal phrase, it would
-be trivial to know whether an account exists.
+Since our API is designed to authenticate the server by providing the user with a secret image and personal phrase,
+it would be trivial to know whether an account exists: If the API is not able to provide a secret image and
+personal phrase, then the account does not exist.
 
 A way to mitigate these attacks would be to return uniform answers to the first step of the authentication process.
 
-Whether an account exists or not, the API MUST return a 200 answer, with a secret image and personal phrase. If the account
-does not exist, they MUST be generated or picked randomly, but based on a representative sample of actual secret images and
-personal phrases. 
+Whether an account exists or not, the API MUST return a 200 OK answer, with a secret image and personal phrase.
+If the account does not exist, they MUST be generated or picked randomly, but based on a representative
+sample of actual secret images and personal phrases.
 
 An easy way to implement this is not to offer an unrestricted choice to the user for its image and phrase, but to
 offer a pick in a predetermine bank (such as a bank of stock photos and a bank of quotes from well known
