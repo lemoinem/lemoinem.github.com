@@ -4,7 +4,7 @@ title: "Authentication and security for REST API in the context of Web Apps (Int
 ---
 
 I am, finally, starting to look at developing REST APIs as the backend of a Web
-Apps. I'm certainly not the first and the community as already been developing
+Apps. I'm certainly not the first and the community has already been developing
 great tools and technologies for this.
 
 In particular, given my background with PHP and Symfony, I've been looking at:
