@@ -11,7 +11,7 @@ and [securing a RESTful authentication API][part-5].
 
 Security in the authentication mechanism is paramount. A secure authentication
 layer ensures no user will be (easily) impersonated. It also ensures no data
-will be stolen from the user, either because of [phishing attacks][[phishing]
+will be stolen from the user, either because of [phishing attacks][phishing]
 (criteria 8) or because of [tracking and privacy-lacking][privacy] tokens
 (criteria 10).
 
